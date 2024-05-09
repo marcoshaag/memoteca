@@ -8,7 +8,7 @@ import { Observable } from 'rxjs';
 })
 export class PensamentoService {
 
-  private readonly API = 'api'
+  private readonly API = 'api/listar'
 
   constructor(private http: HttpClient) { }
 
