@@ -2,7 +2,7 @@ import { Router } from '@angular/router';
 import { PensamentoService } from './../pensamento.service';
 import { Pensamentos } from './../pensamento';
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-criar-pensamento',
@@ -22,8 +22,8 @@ export class CriarPensamentoComponent implements OnInit {
 
   ngOnInit(): void {
     this.formulario = this.formBuilder.group({
-      conteudo: ['formulario reativo'],
-      autoria: [''],
+      conteudo: ['formulario reativo',[Validators.required]],
+      autoria: ['Angular',[Validators.required]],
       modelo: ['modelo1']
     })
 
@@ -32,9 +32,11 @@ export class CriarPensamentoComponent implements OnInit {
 
 
   criarPensamento() {
+    if(this.formulario.valid){
     this.service.criar(this.formulario.value).subscribe(() => {
       this.router.navigate(['/listarPensamento'])
     })
+  }
   }
 
   cancelar() {
