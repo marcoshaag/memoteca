@@ -10,34 +10,30 @@ import { Pensamentos } from '../pensamento';
 })
 export class ExcluirPensamentoComponent implements OnInit {
 
-  pensamentos: Pensamentos[] = [];
+  pensamento!: Pensamentos;
+  idAtividade!: string | null;
 
   constructor(
-    private Pensamentoservice: PensamentoService,
+    private pensamentoService: PensamentoService,
     private router: Router,
     private route: ActivatedRoute
   ) { }
 
   ngOnInit(): void {
-    console.log(this.descobriri);
-  }
-
-  descobriri () : void {
-    const id = this.route.snapshot.paramMap.get('id')
-    this.Pensamentoservice.buscarPorId(parseInt(id!)).subscribe((pensamento) => {
-
-    })
-  }
-
-  excluirPensamento(id: number) {
-    this.Pensamentoservice.excluir(id).subscribe(() => {
-      this.router.navigate(['/listarPensamento'])
-    })
+    this.idAtividade =  this.route.snapshot.paramMap.get('id')
   }
 
 
-  cancelar() {
-    this.router.navigate(['/listarPensamento'])
+  excluirPensamento(): void {
+    if (this.idAtividade) {
+      this.pensamentoService.excluir(parseInt(this.idAtividade)).subscribe(() => {
+        this.router.navigate(['/listarPensamento']);
+      });
+    }
+  }
+
+  cancelar(): void {
+    this.router.navigate(['/listarPensamento']);
   }
 
 }
