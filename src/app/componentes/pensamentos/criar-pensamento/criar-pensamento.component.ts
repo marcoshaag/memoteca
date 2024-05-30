@@ -22,13 +22,14 @@ export class CriarPensamentoComponent implements OnInit {
 
   ngOnInit(): void {
     this.formulario = this.formBuilder.group({
-      conteudo: ['formulario reativo',[Validators.required],[Validators.pattern(/(.|\s)*\S(.|\s)*/), ]],
-      autoria: ['Angular',[Validators.required],[Validators.minLength(3)]],
+      conteudo: ['', [Validators.required, Validators.pattern(/(.|\s)*\S(.|\s)*/)]],
+      autoria: ['', [Validators.required, Validators.minLength(3)]],
       modelo: ['modelo1']
-    })
-
-
+    });
   }
+
+
+
 
 
   criarPensamento() {
